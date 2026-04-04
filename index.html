@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shahd Ghunimah | Portfolio</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-strong: #ffffff;
+      --text: #12343b;
+      --muted: #5f7478;
+      --dark-teal: #0f5b63;
+      --teal: #1f9aa5;
+      --orange: #de7426;
+      --lime: #98bf2f;
+      --border: rgba(15, 91, 99, 0.12);
+      --shadow: 0 20px 45px rgba(15, 91, 99, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, "Segoe UI", Tahoma, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(222, 116, 38, 0.10), transparent 28%),
+        radial-gradient(circle at top right, rgba(31, 154, 165, 0.12), transparent 30%),
+        radial-gradient(circle at bottom center, rgba(152, 191, 47, 0.10), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(14px);
+      background: rgba(244, 246, 248, 0.72);
+      border-bottom: 1px solid rgba(15, 91, 99, 0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      color: var(--dark-teal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(31, 154, 165, 0.12);
+      color: var(--dark-teal);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      padding: 90px 0 60px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-text {
+      animation: fadeUp 0.9s ease forwards;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(31, 154, 165, 0.12);
+      color: var(--dark-teal);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4.9rem);
+      line-height: 1.05;
+      margin-bottom: 18px;
+      letter-spacing: -1.8px;
+    }
+
+    .hero h1 .accent-1 { color: var(--dark-teal); }
+    .hero h1 .accent-2 { color: var(--orange); }
+    .hero h1 .accent-3 { color: var(--lime); }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--dark-teal), var(--teal));
+      color: white;
+      box-shadow: 0 14px 32px rgba(15, 91, 99, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 22px 42px rgba(15, 91, 99, 0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.72);
+      border-color: rgba(15, 91, 99, 0.14);
+      color: var(--dark-teal);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-4px);
+      background: white;
+      box-shadow: 0 16px 34px rgba(15, 91, 99, 0.12);
+    }
+
+    .hero-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      animation: floatCard 5s ease-in-out infinite;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -35% auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(222, 116, 38, 0.20), transparent 60%);
+      pointer-events: none;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(15, 91, 99, 0.08);
+      border-radius: 18px;
+      padding: 18px;
+      transition: 0.3s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 28px rgba(15, 91, 99, 0.10);
+    }
+
+    .stat h3 {
+      font-size: 1.7rem;
+      color: var(--dark-teal);
+      margin-bottom: 4px;
+    }
+
+    .stat p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    section.section {
+      padding: 42px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: var(--dark-teal);
+    }
+
+    .section-subtitle {
+      max-width: 720px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .about-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      transition: 0.35s ease;
+    }
+
+    .about-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(15, 91, 99, 0.16);
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: 0.25s ease;
+      cursor: default;
+    }
+
+    .tag.teal {
+      background: rgba(31, 154, 165, 0.12);
+      color: var(--dark-teal);
+    }
+
+    .tag.orange {
+      background: rgba(222, 116, 38, 0.12);
+      color: var(--orange);
+    }
+
+    .tag.lime {
+      background: rgba(152, 191, 47, 0.16);
+      color: #6f8f12;
+    }
+
+    .tag:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .project-card {
+      position: relative;
+      background: var(--surface-strong);
+      border: 1px solid rgba(15, 91, 99, 0.10);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 16px 36px rgba(15, 91, 99, 0.08);
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(31, 154, 165, 0.05));
+      opacity: 0;
+      transition: 0.35s ease;
+      pointer-events: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 24px 48px rgba(15, 91, 99, 0.14);
+      border-color: rgba(31, 154, 165, 0.24);
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .project-badge {
+      font-size: 0.82rem;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+    }
+
+    .project-badge.orange {
+      background: rgba(222, 116, 38, 0.14);
+      color: var(--orange);
+    }
+
+    .project-badge.teal {
+      background: rgba(31, 154, 165, 0.14);
+      color: var(--dark-teal);
+    }
+
+    .project-badge.lime {
+      background: rgba(152, 191, 47, 0.18);
+      color: #6f8f12;
+    }
+
+    .project-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: var(--dark-teal);
+    }
+
+    .project-card p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .mini-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mini-tags span {
+      font-size: 0.82rem;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(15, 91, 99, 0.06);
+      color: var(--dark-teal);
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .mini-tags span:hover {
+      background: rgba(31, 154, 165, 0.14);
+      transform: translateY(-2px);
+    }
+
+    .project-link {
+      font-weight: 800;
+      color: var(--dark-teal);
+      transition: 0.25s ease;
+    }
+
+    .project-link:hover {
+      color: var(--orange);
+      transform: translateX(4px);
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, rgba(15, 91, 99, 0.95), rgba(31, 154, 165, 0.92));
+      color: white;
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 24px 50px rgba(15, 91, 99, 0.20);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-box::before,
+    .contact-box::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.16;
+      pointer-events: none;
+    }
+
+    .contact-box::before {
+      width: 240px;
+      height: 240px;
+      background: var(--orange);
+      top: -80px;
+      right: -60px;
+    }
+
+    .contact-box::after {
+      width: 180px;
+      height: 180px;
+      background: var(--lime);
+      bottom: -70px;
+      left: -40px;
+    }
+
+    .contact-box h2 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .contact-box p {
+      max-width: 650px;
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .contact-links a {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.28s ease;
+    }
+
+    .contact-links a:hover {
+      background: white;
+      color: var(--dark-teal);
+      transform: translateY(-4px);
+    }
+
+    footer {
+      padding: 28px 0 42px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatCard {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.2rem, 8vw, 3.6rem);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .hero-actions,
+      .contact-links {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn,
+      .contact-links a {
+        width: 100%;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">Shahd Ghunimah</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Data Science • AI • Deep Learning • Portfolio</span>
+        <h1>
+          Building <span class="accent-1">intelligent</span>,
+          <span class="accent-2">practical</span>,
+          <span class="accent-3">data-driven</span> solutions.
+        </h1>
+        <p>
+          I’m Shahd Ghunimah, a Data Science and Artificial Intelligence student focused on machine learning,
+          deep learning, and building practical systems that turn data into real-world impact.
+          This portfolio showcases the projects I’m developing through hands-on learning and applied work.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="hero-card reveal">
+        <div class="stat-grid">
+          <div class="stat">
+            <h3>01+</h3>
+            <p>Completed portfolio projects</p>
+          </div>
+          <div class="stat">
+            <h3>AI</h3>
+            <p>Applied artificial intelligence focus</p>
+          </div>
+          <div class="stat">
+            <h3>DL</h3>
+            <p>Machine learning & deep learning track</p>
+          </div>
+          <div class="stat">
+            <h3>Live</h3>
+            <p>GitHub portfolio in progress</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section reveal" id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">
+        A concise introduction that tells employers who I am, what I study, and what I am building.
+      </p>
+
+      <div class="about-box">
+        <p>
+          I am a Data Science and Artificial Intelligence student with a strong interest in machine learning,
+          deep learning, and intelligent data-driven systems. I enjoy building practical projects that combine
+          analytical thinking, clean workflows, and real-world problem solving. My interests include NLP,
+          data pipelines, and scalable AI applications.
+        </p>
+
+        <div class="skills">
+          <span class="tag teal">Python</span>
+          <span class="tag orange">SQL</span>
+          <span class="tag lime">Machine Learning</span>
+          <span class="tag teal">Deep Learning</span>
+          <span class="tag orange">Data Science</span>
+          <span class="tag lime">NLP</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="projects">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">
+        One clear sentence per project, a repo link, and a few core tools.
+      </p>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-top">
+            <span class="project-badge teal">Foundations</span>
+          </div>
+          <h3>ETL Pipeline Project</h3>
+          <p>
+            Built a Python ETL workflow that extracts raw data, transforms it into a usable format,
+            and prepares it for analysis and downstream use.
+          </p>
+          <div class="project-footer">
+            <div class="mini-tags">
+              <span>Python</span>
+              <span>Pandas</span>
+              <span>SQL</span>
+            </div>
+            <a class="project-link" href="https://github.com/ShahdGunimah7" target="_blank">View Repo →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-top">
+            <span class="project-badge orange">ML & NLP</span>
+          </div>
+          <h3>Future ML Project</h3>
+          <p>
+            Placeholder for a machine learning project showcasing data preparation, model training,
+            evaluation, and real insights from data.
+          </p>
+          <div class="project-footer">
+            <div class="mini-tags">
+              <span>Scikit-learn</span>
+              <span>Modeling</span>
+              <span>Evaluation</span>
+            </div>
+            <a class="project-link" href="#" target="_blank">Coming Soon →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-top">
+            <span class="project-badge lime">Deployment</span>
+          </div>
+          <h3>Future API / Deployment Project</h3>
+          <p>
+            Placeholder for a deployed AI application or API project, including system design,
+            architecture, and production-ready workflow.
+          </p>
+          <div class="project-footer">
+            <div class="mini-tags">
+              <span>API</span>
+              <span>Deployment</span>
+              <span>FastAPI</span>
+            </div>
+            <a class="project-link" href="#" target="_blank">Coming Soon →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-top">
+            <span class="project-badge teal">Capstone</span>
+          </div>
+          <h3>Capstone Project</h3>
+          <p>
+            Placeholder for my final end-to-end project that brings together data science,
+            AI, and real-world system building.
+          </p>
+          <div class="project-footer">
+            <div class="mini-tags">
+              <span>End-to-End</span>
+              <span>AI</span>
+              <span>Systems</span>
+            </div>
+            <a class="project-link" href="#" target="_blank">Coming Soon →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <h2>Let’s Connect</h2>
+        <p>
+          I’m continuously building my portfolio and adding new projects as I grow in data science
+          and artificial intelligence. You can find my work and contact me through the links below.
+        </p>
+
+        <div class="contact-links">
+          <a href="https://github.com/ShahdGunimah7" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/shahd-alaa-299481248?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank">LinkedIn</a>
+          <a href="mailto:shahdgunimah@gmail.com">Email Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Shahd Ghunimah — Portfolio Website
+  </footer>
+
+  <script>
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealOnScroll = () => {
+      revealElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    const buttons = document.querySelectorAll('.btn, .contact-links a, .project-link, .nav-links a');
+    buttons.forEach((button) => {
+      button.addEventListener('mousedown', () => {
+        button.style.transform += ' scale(0.98)';
+      });
+      button.addEventListener('mouseup', () => {
+        button.style.transform = '';
+      });
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = '';
+      });
+    });
+  </script>
+</body>
+</html>
