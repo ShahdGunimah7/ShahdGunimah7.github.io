@@ -526,10 +526,85 @@
       .nav-links { display: none; }
       .contact-wrap { padding: 40px 24px; }
     }
+
+    /* ---- ANCHOR OFFSET FOR STICKY NAV ---- */
+    section[id], header[id] { scroll-margin-top: 92px; }
+
+    /* ---- SCROLL PROGRESS ---- */
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 200; pointer-events: none; }
+    .scroll-progress span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--teal), var(--lime), var(--orange)); box-shadow: 0 0 12px rgba(0,229,200,0.55); }
+
+    /* ---- NAV: ACTIVE + MOBILE ---- */
+    .nav-links a.active { color: var(--text); background: var(--surface2); border-color: rgba(0,229,200,0.4); }
+    .nav-toggle { display: none; background: var(--surface2); border: 1px solid var(--border); color: var(--text); width: 44px; height: 40px; border-radius: 12px; cursor: pointer; font-size: 1.1rem; font-family: inherit; }
+
+    /* ---- HERO ROTATOR ---- */
+    .rotator { color: var(--lime); display: inline-block; }
+    .rotator .rot-word { display: inline-block; animation: rotIn 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+    @keyframes rotIn { from { opacity: 0; transform: translateY(0.4em); } to { opacity: 1; transform: none; } }
+    .rotator .caret { display: inline-block; width: 4px; height: 0.78em; background: var(--lime); margin-left: 8px; vertical-align: -0.04em; animation: caretBlink 1.05s step-end infinite; }
+    @keyframes caretBlink { 50% { opacity: 0; } }
+
+    /* ---- EXPERIENCE TIMELINE ---- */
+    .timeline { position: relative; margin-top: 34px; padding-left: 30px; }
+    .timeline::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(180deg, var(--teal), var(--purple) 60%, transparent); }
+    .tl-item { position: relative; padding: 0 0 30px 6px; cursor: default; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before { content: ""; position: absolute; left: -29px; top: 9px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--teal); transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; }
+    .tl-item:hover::before { background: var(--teal); box-shadow: 0 0 0 7px rgba(0,229,200,0.13); transform: scale(1.12); }
+    .tl-item.tl-purple::before { border-color: var(--purple); }
+    .tl-item.tl-purple:hover::before { background: var(--purple); box-shadow: 0 0 0 7px rgba(179,136,255,0.13); }
+    .tl-item.tl-orange::before { border-color: var(--orange); }
+    .tl-item.tl-orange:hover::before { background: var(--orange); box-shadow: 0 0 0 7px rgba(255,112,67,0.13); }
+    .tl-date { color: var(--teal); font-size: 0.76rem; font-weight: 800; letter-spacing: 1.3px; text-transform: uppercase; }
+    .tl-item.tl-purple .tl-date { color: var(--purple); }
+    .tl-item.tl-orange .tl-date { color: var(--orange); }
+    .tl-role { font-size: 1.12rem; font-weight: 800; letter-spacing: -0.3px; margin: 5px 0 2px; }
+    .tl-org { color: var(--muted); font-size: 0.88rem; margin-bottom: 9px; }
+    .tl-item p { color: var(--muted); font-size: 0.92rem; line-height: 1.72; max-width: 720px; }
+
+    /* ---- PROJECT FILTER BAR ---- */
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 4px 0 14px; }
+    .filter-chip { padding: 9px 17px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-family: inherit; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.2s ease; }
+    .filter-chip:hover { color: var(--text); background: var(--surface2); transform: translateY(-2px); }
+    .filter-chip.active { color: #050810; background: var(--teal); border-color: var(--teal); }
+    .filter-chip .chip-count { opacity: 0.65; font-size: 0.78rem; margin-left: 5px; }
+    .search-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 26px; }
+    .project-search { flex: 1; min-width: 220px; padding: 12px 18px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-family: inherit; font-size: 0.92rem; outline: none; transition: border-color 0.25s ease, background 0.25s ease; }
+    .project-search::placeholder { color: var(--muted); }
+    .project-search:focus { border-color: rgba(0,229,200,0.5); background: var(--surface2); }
+    .result-count { color: var(--muted); font-size: 0.83rem; font-weight: 700; letter-spacing: 0.4px; white-space: nowrap; }
+    .project-card.filtered-out { display: none; }
+    .project-card.pop-in { animation: cardPop 0.45s cubic-bezier(0.22,1,0.36,1) both; }
+    @keyframes cardPop { from { opacity: 0; transform: translateY(26px) scale(0.97); } to { opacity: 1; transform: none; } }
+    .no-results { grid-column: 1 / -1; text-align: center; padding: 56px 24px; color: var(--muted); border: 1px dashed var(--border); border-radius: 22px; }
+    .no-results strong { color: var(--text); display: block; font-size: 1.1rem; margin-bottom: 6px; }
+
+    /* ---- CARD CURSOR SPOTLIGHT ---- */
+    .project-card > * { position: relative; z-index: 1; }
+    .project-card::after { content: ""; position: absolute; inset: 0; border-radius: 22px; background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,0.07), transparent 62%); opacity: 0; transition: opacity 0.35s ease; pointer-events: none; z-index: 0; }
+    .project-card:hover::after { opacity: 1; }
+
+    @media (max-width: 600px) {
+      nav .nav-inner { position: relative; }
+      .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+      .nav-links { display: none; position: absolute; top: calc(100% + 12px); left: 0; right: 0; flex-direction: column; gap: 8px; padding: 14px; background: #070b15; backdrop-filter: blur(18px); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 24px 50px rgba(0,0,0,0.7); }
+      .nav-links.open { display: flex; }
+      .nav-links a { text-align: center; }
+      .project-search { min-width: 100%; }
+      .result-count { width: 100%; }
+    }
+
+    /* ---- MOTION PREFERENCES ---- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
  
+<div class="scroll-progress"><span id="scrollBar"></span></div>
 <div class="cursor-glow" id="cursorGlow"></div>
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
@@ -539,8 +614,10 @@
 <nav>
   <div class="container nav-inner">
     <a href="#" class="logo">Shahd Ghunimah</a>
-    <div class="nav-links">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
+      <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </div>
@@ -555,7 +632,7 @@
         <span class="word-1">Building</span><br>
         <span class="word-2">intelligent</span><br>
         <span class="word-3">data-driven</span><br>
-        <span class="word-4">systems.</span>
+        <span class="word-4 rotator" id="rotator"><span class="rot-word">systems.</span><span class="caret"></span></span>
       </h1>
       <p>I'm Shahd Ghunimah — I build intelligent systems that turn raw data into real-world impact. My work spans machine learning, Deep learning, NLP, retrieval-augmented generation, Full AI projects and semantic web engineering.</p>
       <div class="hero-btns">
@@ -568,16 +645,16 @@
       <div class="hero-card">
         <div class="stat-grid">
           <div class="stat-tile">
-            <div class="num teal">12+</div>
-            <p>Live portfolio projects</p>
+            <div class="num teal" data-count="15" data-suffix="+">0</div>
+            <p>Projects shipped</p>
           </div>
           <div class="stat-tile">
-            <div class="num orange">AI</div>
-            <p>Applied intelligence focus</p>
+            <div class="num orange" data-count="96" data-suffix="%">0</div>
+            <p>Capstone retrieval grounding rate</p>
           </div>
           <div class="stat-tile">
-            <div class="num lime">DL</div>
-            <p>Deep learning track</p>
+            <div class="num lime" data-count="5" data-suffix="">0</div>
+            <p>Roles &amp; internships</p>
           </div>
           <div class="stat-tile">
             <div class="num purple">↗</div>
@@ -592,27 +669,35 @@
 <div class="marquee-section">
   <div class="marquee-track" id="marquee">
     <span class="marquee-item"><span class="marquee-dot"></span> Python</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Machine Learning</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> RAG Systems</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> LangGraph Agents</span>
     <span class="marquee-item"><span class="marquee-dot"></span> Deep Learning</span>
     <span class="marquee-item"><span class="marquee-dot"></span> NLP</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> SQL</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Data Pipelines</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> ETL</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> TensorFlow</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Scikit-learn</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Speech-to-Text</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Arabic NLP</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Knowledge Graphs</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> PyTorch</span>
     <span class="marquee-item"><span class="marquee-dot"></span> FastAPI</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> AI Systems</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Weaviate</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Neo4j</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Docker</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Vector Search</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> SQL</span>
     <span class="marquee-item"><span class="marquee-dot"></span> Python</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Machine Learning</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> RAG Systems</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> LangGraph Agents</span>
     <span class="marquee-item"><span class="marquee-dot"></span> Deep Learning</span>
     <span class="marquee-item"><span class="marquee-dot"></span> NLP</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> SQL</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Data Pipelines</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> ETL</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> TensorFlow</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Scikit-learn</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Speech-to-Text</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Arabic NLP</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Knowledge Graphs</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> PyTorch</span>
     <span class="marquee-item"><span class="marquee-dot"></span> FastAPI</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> AI Systems</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Weaviate</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Neo4j</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Docker</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Vector Search</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> SQL</span>
   </div>
 </div>
  
@@ -657,6 +742,54 @@
   </div>
 </section>
  
+<section id="experience">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">// Experience</span>
+      <h2 class="section-title">Where I've worked.</h2>
+      <p class="section-sub">Applied AI in production teams, research programs, and development projects across Jordan.</p>
+    </div>
+    <div class="timeline reveal">
+
+      <div class="tl-item">
+        <div class="tl-date">Aug 2026</div>
+        <div class="tl-role">AI Engineer Intern</div>
+        <div class="tl-org">Optimiza · Business Solutions Unit — Amman, Jordan</div>
+        <p>Built the real-time Arabic speech-to-text pipeline for a legal transcription system — live streamed audio, incremental transcripts, punctuation restoration, and legal entity and citation extraction. Worked in a three-engineer team alongside an agentic RAG assistant grounded in Jordanian law.</p>
+      </div>
+
+      <div class="tl-item tl-purple">
+        <div class="tl-date">Feb 2026 — Aug 2026</div>
+        <div class="tl-role">Module Mentor</div>
+        <div class="tl-org">AI. SPIRE — Amman, Jordan</div>
+        <p>Mentored early-career AI engineers through an applied curriculum covering RAG pipelines, LLM deployment, and production AI systems. Reviewed module assignments and gave structured feedback bridging theory and implementation.</p>
+      </div>
+
+      <div class="tl-item tl-orange">
+        <div class="tl-date">Jan 2025 — Feb 2025</div>
+        <div class="tl-role">AI &amp; Technology Intern</div>
+        <div class="tl-org">Knowledge Beam — Amman, Jordan</div>
+        <p>Developed, evaluated, and tested machine learning and deep learning models for production AI solutions, optimizing performance through preprocessing, feature engineering, and validation.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">Jun 2024 — Oct 2024</div>
+        <div class="tl-role">AI &amp; Data Analytics Intern</div>
+        <div class="tl-org">ASAS Project (IREX / USAID) — Amman, Jordan</div>
+        <p>Designed Power BI dashboards visualizing project KPIs and operational metrics, and structured project data to keep reporting accurate and consistent across datasets.</p>
+      </div>
+
+      <div class="tl-item tl-purple">
+        <div class="tl-date">Jun 2023 — Oct 2023</div>
+        <div class="tl-role">AI Project Intern</div>
+        <div class="tl-org">PRESTEIJ Project (IREX / USAID) — Amman, Jordan</div>
+        <p>Contributed to development and testing of AI-powered educational tools with the Ministry of Education and Kaizen IT, running QA and technical validation on the TDSM and CPTT platforms.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+ 
 <section id="projects">
   <div class="container">
     <div class="reveal">
@@ -664,7 +797,20 @@
       <h2 class="section-title">What I've built.</h2>
       <p class="section-sub">From raw data to deployed systems — real engineering decisions, measurable outcomes, production-ready thinking.</p>
     </div>
-    <div class="projects-grid">
+    <div class="filter-bar reveal" id="filterBar">
+      <button class="filter-chip active" data-filter="all" type="button">All</button>
+      <button class="filter-chip" data-filter="rag" type="button">RAG &amp; Agents</button>
+      <button class="filter-chip" data-filter="nlp" type="button">NLP &amp; Speech</button>
+      <button class="filter-chip" data-filter="dl" type="button">Deep Learning</button>
+      <button class="filter-chip" data-filter="semantic" type="button">Semantic Web</button>
+      <button class="filter-chip" data-filter="ml" type="button">ML &amp; Modeling</button>
+      <button class="filter-chip" data-filter="data" type="button">Data Engineering</button>
+    </div>
+    <div class="search-row reveal">
+      <input class="project-search" id="projectSearch" type="search" placeholder="Search projects — try &quot;Arabic&quot;, &quot;retrieval&quot;, &quot;PyTorch&quot;…" aria-label="Search projects"/>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
  
       <article class="project-card live-card reveal reveal-delay-1" style="--card-glow: rgba(0,229,200,0.08); --card-border: rgba(0,229,200,0.3);" data-project="etl">
         <div class="card-header">
@@ -860,13 +1006,40 @@
         </div>
       </article>
  
+
+<article class="project-card live-card reveal" style="--card-glow: rgba(0,229,200,0.08); --card-border: rgba(0,229,200,0.3);" data-project="legal-voice">
+  <div class="card-header">
+    <span class="badge teal">Speech · Arabic NLP</span>
+    <div class="card-icon teal">🎙️</div>
+  </div>
+  <h3>Arabic Legal Transcription &amp; Voice Assistant</h3>
+  <p>Real-time Arabic speech-to-text for a legal transcription system — live streamed audio, incremental transcripts, punctuation restoration, and legal entity and citation extraction over Jordanian law. Built at Optimiza alongside an agentic RAG legal assistant.</p>
+  <div class="card-footer">
+    <div class="mini-tags"><span>Speech-to-Text</span><span>Arabic NLP</span><span>Agentic RAG</span></div>
+    <span class="card-link" style="color: var(--muted);">Internship · Private</span>
+  </div>
+</article>
+
+<article class="project-card live-card reveal reveal-delay-1" style="--card-glow: rgba(198,255,0,0.06); --card-border: rgba(198,255,0,0.3);" data-project="germiscope">
+  <div class="card-header">
+    <span class="badge lime">Deep Learning · IoT</span>
+    <div class="card-icon lime">🧬</div>
+  </div>
+  <h3>GermiScope — Medical Environmental Monitoring</h3>
+  <p>Graduation project: an AI-powered environmental monitoring system classifying indoor air quality across six pollution levels in real time, pairing Transformer-based deep learning models with ESP32 IoT sensors and an end-to-end data pipeline.</p>
+  <div class="card-footer">
+    <div class="mini-tags"><span>PyTorch</span><span>Transformers</span><span>ESP32</span></div>
+    <span class="card-link" style="color: var(--muted);">Graduation Project</span>
+  </div>
+</article>
+
       <article class="project-card live-card reveal" style="--card-glow: rgba(179,136,255,0.08); --card-border: rgba(179,136,255,0.3);" data-project="capstone">
         <div class="card-header">
           <span class="badge purple">Capstone ✦</span>
           <div class="card-icon purple">⭐</div>
         </div>
         <h3>AI Shopping Assistant</h3>
-        <p>An end-to-end AI shopping assistant powered by a RAG pipeline and LangGraph multi-agent orchestration — combining Weaviate for retrieval, a FastAPI backend, and a React frontend, containerized and deployed with Docker Compose and GitHub Actions.</p>
+        <p>A conversational shopping assistant over a 2,514-product catalog. I owned the RAG pipeline — scraper, embeddings, vector store — and the LangGraph multi-agent layer, and lifted retrieval grounding from 52% to 96% on a 50-query held-out set by diagnosing sparse product metadata as the dominant failure mode.</p>
         <div class="card-footer">
           <div class="mini-tags">
             <span>RAG</span>
@@ -1048,14 +1221,32 @@
       highlights: ["Built a two-stage retrieval architecture.","Applied transformer-based re-ranking.","Measured Recall@5 and MRR performance.","Analyzed latency and quality tradeoffs.","Explored practical RAG retrieval optimization."]
     },
 
+    "legal-voice": {
+      icon: "🎙️",
+      kicker: "Optimiza · Speech · Arabic NLP",
+      title: "Arabic Legal Transcription & Voice Assistant",
+      description: "Built during a two-week engineering sprint at Optimiza's Business Solutions Unit. The system turns live Arabic legal speech into clean, punctuated, reference-linked transcripts — and sits alongside a voice-enabled agentic RAG assistant grounded in three Jordanian legal corpora.",
+      repo: "#",
+      metrics: [["Role", "Speech pipeline owner"], ["Team", "3 engineers"], ["Domain", "Jordanian law"]],
+      highlights: ["Built the real-time speech-to-text pipeline: live streamed audio input with incremental, low-latency transcript updates.", "Implemented post-processing — punctuation restoration and automated transcript correction for Arabic legal speech.", "Contributed legal entity and citation extraction, turning transcripts into searchable, reference-linked records.", "Worked alongside an agentic RAG assistant covering the Labor Law, Social Security Law, and Civil Code.", "Kept the repository free of secrets and real user data throughout, on a branch-and-pull-request workflow."]
+    },
+    "germiscope": {
+      icon: "🧬",
+      kicker: "Graduation Project · Deep Learning · IoT",
+      title: "GermiScope — Medical Environmental Monitoring System",
+      description: "An AI-powered environmental monitoring system that classifies indoor air quality in real time across six pollution-level categories, combining Transformer-based deep learning with embedded IoT sensing and a full data pipeline.",
+      repo: "#",
+      metrics: [["Classes", "6 pollution levels"], ["Models", "Transformer-based"], ["Hardware", "ESP32 sensors"]],
+      highlights: ["Designed and trained Transformer-based deep learning models for environmental condition analysis.", "Integrated the models with ESP32 IoT sensors for real-time monitoring and data collection.", "Built the end-to-end pipeline from sensor ingestion through classification to storage and serving.", "Combined deep learning, environmental analytics, embedded sensing, and real-world deployment in one system."]
+    },
     "capstone": {
       icon: "⭐",
       kicker: "Capstone · AI Shopping Assistant",
       title: "AI Shopping Assistant",
-      description: "An end-to-end AI shopping assistant built with a Retrieval-Augmented Generation pipeline and LangGraph multi-agent orchestration. Weaviate powers retrieval, FastAPI serves the backend, and React drives the frontend — the whole system is containerized with Docker Compose and deployed via GitHub Actions.",
+      description: "A conversational shopping assistant built by a team of four for the AI. SPIRE capstone. I owned the retrieval half: the store catalog scraper, sentence-transformer embeddings, the vector store, and the LangGraph multi-agent layer that routes a shopping conversation across Product Expert, Inventory, Order, Location, and Support agents.",
       repo: "https://github.com/Capstone-G1-Team4/main-repo",
-      metrics: [["Status", "Completed"], ["Stack", "RAG · LangGraph"], ["Deployment", "Docker · GitHub Actions"]],
-      highlights: ["Built a RAG pipeline with LangGraph multi-agent orchestration.", "Used Weaviate as the vector store for retrieval.", "Built a FastAPI backend and React frontend.", "Containerized with Docker Compose and deployed via GitHub Actions CI/CD.", "Brought together data engineering, retrieval, and full-stack deployment into one system."]
+      metrics: [["Grounding rate", "52% → 96%"], ["Held-out set", "50 queries"], ["Catalog", "2,514 products"]],
+      highlights: ["Owned the RAG pipeline end-to-end: scraper, embeddings, and vector indexing across 2,514 products in six categories.", "Built the LangGraph multi-agent layer so the assistant can recommend, answer, and collect a full order in chat.", "Raised retrieval grounding from 52% to 96% against a 10% random-retrieval baseline on a held-out set of 50 customer queries.", "Traced the gain to sparse product metadata — enriching color and spec attributes was the single largest improvement in the project.", "Ran error analysis across query type and product category to document failure cases and next-iteration hypotheses."]
     }
   };
 
@@ -1113,7 +1304,202 @@
   modal.addEventListener('click', (e) => { if (e.target === modal) closeProjectModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProjectModal(); });
 
-  document.querySelectorAll('.btn, .contact-btn, .project-card, .skill-tag').forEach(el => {
+
+
+  /* ---------- MOTION PREFERENCE ---------- */
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- SCROLL PROGRESS ---------- */
+  const scrollBar = document.getElementById('scrollBar');
+  let progressTicking = false;
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    scrollBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+    progressTicking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!progressTicking) { progressTicking = true; requestAnimationFrame(updateProgress); }
+  }, { passive: true });
+  updateProgress();
+
+  /* ---------- ACTIVE NAV LINK ---------- */
+  const navLinkEls = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+  const navSections = navLinkEls
+    .map(a => ({ link: a, section: document.querySelector(a.getAttribute('href')) }))
+    .filter(x => x.section);
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      navSections.forEach(({ link, section }) => link.classList.toggle('active', section === entry.target));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  navSections.forEach(({ section }) => navObserver.observe(section));
+
+  /* ---------- MOBILE NAV ---------- */
+  const navToggle = document.getElementById('navToggle');
+  const navLinksBox = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinksBox.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.textContent = open ? '\u2715' : '\u2630';
+  });
+  navLinksBox.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+      navLinksBox.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.textContent = '\u2630';
+    }
+  });
+
+  /* ---------- HERO WORD ROTATOR ---------- */
+  const rotator = document.getElementById('rotator');
+  if (rotator && !reducedMotion) {
+    const rotWords = ['systems.', 'assistants.', 'pipelines.', 'agents.', 'retrievers.'];
+    let rotIndex = 0;
+    setInterval(() => {
+      rotIndex = (rotIndex + 1) % rotWords.length;
+      const fresh = document.createElement('span');
+      fresh.className = 'rot-word';
+      fresh.textContent = rotWords[rotIndex];
+      rotator.querySelector('.rot-word').replaceWith(fresh);
+    }, 2600);
+  }
+
+  /* ---------- COUNT-UP STATS ---------- */
+  const counters = document.querySelectorAll('[data-count]');
+  const counterObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const suffix = el.dataset.suffix || '';
+      if (reducedMotion) { el.textContent = target + suffix; obs.unobserve(el); return; }
+      const duration = 1400;
+      const start = performance.now();
+      function step(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+
+  /* ---------- PROJECT CATEGORIES ---------- */
+  const projectCats = {
+    "legal-voice": "rag nlp",
+    "germiscope": "dl",
+    "capstone": "rag nlp",
+    "reranking-rag": "rag semantic",
+    "sparql-cli": "semantic",
+    "ontology-design": "semantic",
+    "multilingual-ner": "nlp",
+    "custom-ner": "nlp",
+    "etl": "data",
+    "sql-mystery": "data",
+    "model-cli": "ml",
+    "gridsearch": "ml",
+    "regularization": "ml",
+    "ml-classification": "ml nlp",
+    "ai-api": "ml"
+  };
+
+  const grid = document.getElementById('projectsGrid');
+  const allCards = Array.from(grid.querySelectorAll('.project-card[data-project]'));
+  allCards.forEach(card => {
+    const key = card.dataset.project;
+    card.dataset.cat = projectCats[key] || '';
+    const extra = (projectData[key] ? projectData[key].highlights.join(' ') : '');
+    card.dataset.search = (card.textContent + ' ' + extra).toLowerCase().replace(/\s+/g, ' ');
+  });
+
+  const emptyState = document.createElement('div');
+  emptyState.className = 'no-results';
+  emptyState.style.display = 'none';
+  emptyState.innerHTML = '<strong>Nothing matches that yet.</strong><span>Try a different keyword, or clear the filter to see all projects.</span>';
+  grid.appendChild(emptyState);
+
+  const chips = Array.from(document.querySelectorAll('.filter-chip'));
+  const searchInput = document.getElementById('projectSearch');
+  const resultCount = document.getElementById('resultCount');
+  let activeFilter = 'all';
+
+  chips.forEach(chip => {
+    const f = chip.dataset.filter;
+    const n = f === 'all' ? allCards.length : allCards.filter(c => c.dataset.cat.split(' ').includes(f)).length;
+    const badge = document.createElement('span');
+    badge.className = 'chip-count';
+    badge.textContent = n;
+    chip.appendChild(badge);
+  });
+
+  function applyFilters() {
+    const q = searchInput.value.trim().toLowerCase();
+    const terms = q ? q.split(/\s+/) : [];
+    let shown = 0;
+    allCards.forEach(card => {
+      const catOk = activeFilter === 'all' || card.dataset.cat.split(' ').includes(activeFilter);
+      const textOk = terms.every(t => card.dataset.search.includes(t));
+      const visible = catOk && textOk;
+      card.classList.toggle('filtered-out', !visible);
+      if (visible) {
+        shown++;
+        card.classList.add('visible');
+        if (!reducedMotion) {
+          card.classList.remove('pop-in');
+          void card.offsetWidth;
+          card.classList.add('pop-in');
+        }
+      }
+    });
+    emptyState.style.display = shown === 0 ? 'block' : 'none';
+    resultCount.textContent = shown + (shown === 1 ? ' project' : ' projects');
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  let searchTimer;
+  searchInput.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(applyFilters, 120);
+  });
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { searchInput.value = ''; applyFilters(); }
+  });
+  applyFilters();
+
+  /* ---------- CARD CURSOR SPOTLIGHT ---------- */
+  if (!reducedMotion && window.matchMedia('(hover: hover)').matches) {
+    allCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    });
+  }
+
+  /* ---------- KEYBOARD: "/" FOCUSES SEARCH ---------- */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      e.preventDefault();
+      searchInput.focus();
+      searchInput.scrollIntoView({ block: 'center', behavior: reducedMotion ? 'auto' : 'smooth' });
+    }
+  });
+
+  document.querySelectorAll('.btn, .contact-btn, .skill-tag').forEach(el => {
     el.addEventListener('mousedown', () => { el.style.transform = (el.style.transform || '') + ' scale(0.97)'; });
     el.addEventListener('mouseup', () => { el.style.transform = ''; });
     el.addEventListener('mouseleave', () => { el.style.transform = ''; });
